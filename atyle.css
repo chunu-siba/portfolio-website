@@ -448,6 +448,7 @@ nav ul#list {
     }
     .container-4 .card-4 {
         padding: 0.5em 1em; /* Reduced internal padding for cards */
+        max-width: 90%;
     }
     .container-4 .card-4 p {
         font-size: 1rem; /* Smaller testimonial text */
