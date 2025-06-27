@@ -466,6 +466,9 @@ nav ul#list {
     .four h1 {
         font-size: 1.5rem; /* Even smaller heading */
     }
+       .container-4 {
+        width: 100%;
+       }
     .container-4 .card-4 img {
         width: 6em; /* Smaller image */
         height: 6em;
