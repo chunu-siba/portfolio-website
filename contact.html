@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chunu Siba | Contact Me Form</title>
+    <!-- Google Fonts - Inter for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            margin: 0;
+            padding: 20px; /* Add some padding around the form for small screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            background-image: url(images/cool.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Main container for the form page content */
+        .contact-page-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* Take full width */
+            min-height: calc(100vh - 40px); /* Adjust for body padding */
+        }
+
+        /* Content card styling (formerly modal-content) */
+        .contact-form-card {
+            background-color: rgba(0, 0, 0, 0.514);
+            padding: 2.5rem; /* Increased padding */
+            border-radius: 1.5rem; /* More rounded */
+            max-width: 90%; /* Responsive width */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Enhanced shadow */
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for desktop */
+        }
+
+        /* Form styling */
+        .container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .container label {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        .container input[type=text],
+        .container select,
+        .container textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db; /* subtle border */
+            border-radius: 0.5rem; /* rounded corners */
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .container input[type=text]:focus,
+        .container select:focus,
+        .container textarea:focus {
+            outline: none;
+            border-color: #3b82f6; /* blue focus border */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* subtle blue shadow */
+        }
+        .container textarea {
+            resize: vertical;
+            min-height: 120px; /* Adjust as needed */
+        }
+        .container input[type=submit],
+        .action-button {
+            background-color: #046718; /* Green */
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem; /* Spacing */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container input[type=submit]:hover,
+        .action-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .action-button.secondary {
+            background-color: #6b7280; /* Gray for edit/back */
+        }
+        .action-button.secondary:hover {
+            background-color: #4b5563;
+        }
+
+        /* Confirmation and success messages */
+        #confirmationContent, #successMessage {
+            padding: 1.5rem;
+            background-color: #e0f2fe; /* Light blue background */
+            border-radius: 1rem;
+            margin-top: 1.5rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        #confirmationContent p {
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #333;
+        }
+        #confirmationContent p strong {
+            color: #1f2937;
+        }
+        #successMessage {
+            background-color: #d1fae5; /* Light green for success */
+            color: #065f46;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Utility classes for display */
+        .hidden {
+            display: none !important;
+        }
+        /* Mobile-first flex for buttons, then row for larger screens */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .justify-center { justify-content: center; }
+        .gap-4 { gap: 1rem; } /* 16px */
+        .gap-6 { gap: 1.5rem; } /* 24px */
+        .mb-6 { margin-bottom: 1.5rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .mt-6 { margin-top: 1.5rem; }
+
+        /* Responsive for buttons */
+        @media (min-width: 640px) { /* Corresponds to sm: breakpoint in Tailwind */
+            .sm\:flex-row { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The main container for the contact form, acting as the page content -->
+    <div id="contactFormPage" class="contact-page-wrapper">
+        <!-- The form content card -->
+        <div class="contact-form-card">
+            <!-- Form View -->
+            <div id="formView">
+                <h2 style="
+                    font-size: 1.5rem; /* text-2xl */
+                    font-weight: bold; /* font-bold */
+                    margin-bottom: 1.5rem; /* mb-6 */
+                    text-align: center; /* text-center */
+                    color: #1f2937; /* text-gray-800 */
+                ">Send us a message!</h2>
+                <div class="container">
+                    <form id="contactForm" method="POST" action="submit.php">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="australia">Australia</option>
+                            <option value="canada">Canada</option>
+                            <option value="usa">USA</option>
+                            <option value="kenya">Kenya</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="germany">Germany</option>
+                        </select>
+
+                        <label for="subject">Subject</label>
+                        <textarea id="subject" name="subject" placeholder="Write something.." style="height:120px" required></textarea>
+
+                        <button type="submit" class="action-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Confirmation View -->
+            <div id="confirmationView" class="hidden">
+                <h2 style="
+                    font-size: 1.5rem; /* text-2xl */
+                    font-weight: bold; /* font-bold */
+                    margin-bottom: 1.5rem; /* mb-6 */
+                    text-align: center; /* text-center */
+                    color: #1f2937; /* text-gray-800 */
+                ">Confirm Your Message</h2>
+                <div id="confirmationContent" style="
+                    margin-bottom: 1.5rem; /* mb-6 */
+                    padding: 1rem; /* p-4 */
+                    background-color: #f3f4f6; /* bg-gray-100 */
+                    border-radius: 0.5rem; /* rounded-lg */
+                ">
+                    <!-- Data will be displayed here -->
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button id="editBtn" class="action-button secondary">Edit Message</button>
+                    <button id="confirmSendBtn" class="action-button">Confirm</button>
+                </div>
+            </div>
+
+            <!-- Success Message View -->
+            <div id="successMessageView" class="hidden">
+                <h2 style="
+                    font-size: 1.5rem; /* text-2xl */
+                    font-weight: bold; /* font-bold */
+                    margin-bottom: 1.5rem; /* mb-6 */
+                    text-align: center; /* text-center */
+                    color: #1f2937; /* text-gray-800 */
+                ">Message Sent!</h2>
+                <div id="successMessage" style="
+                    padding: 1.5rem; /* p-6 */
+                    text-align: center; /* text-center */
+                ">
+                    Thank you for your message. We'll get back to you soon!
+                </div>
+                <div class="flex justify-center mt-6">
+                    <button class="action-button" id="closeFormBtn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         // Get elements
+        const contactFormPage = document.getElementById('contactFormPage'); // Renamed from contactModal
+        const contactForm = document.getElementById('contactForm');
+        const formView = document.getElementById('formView');
+        const confirmationView = document.getElementById('confirmationView');
+        const confirmationContent = document.getElementById('confirmationContent');
+        const successMessageView = document.getElementById('successMessageView');
+        const editBtn = document.getElementById('editBtn');
+        const confirmSendBtn = document.getElementById('confirmSendBtn');
+        const closeFormBtn = document.getElementById('closeFormBtn'); // New button for closing from success view
+
+        // Function to reset the form and show the initial form view
+        function resetAndShowForm() {
+            contactForm.reset(); // Clear the form fields
+            formView.classList.remove('hidden'); // Show initial form view
+            confirmationView.classList.add('hidden'); // Hide confirmation view
+            successMessageView.classList.add('hidden'); // Hide success view
+        }
+        
+
+        // Handle form submission (this now triggers the confirmation display)
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form values
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            const country = document.getElementById('country').value;
+            const subject = document.getElementById('subject').value;
+
+            // Display values in the confirmation content area
+            confirmationContent.innerHTML = `
+                <p><strong>First Name:</strong> ${firstName}</p>
+                <p><strong>Last Name:</strong> ${lastName}</p>
+                <p><strong>Country:</strong> ${country}</p>
+                <p><strong>Subject:</strong> ${subject}</p>
+            `;
+
+            // Switch views to show confirmation
+            formView.classList.add('hidden'); // Hide form
+            confirmationView.classList.remove('hidden'); // Show confirmation
+        });
+
+        // Function to edit the message (go back to form)
+        function editMessage() {
+            confirmationView.classList.add('hidden'); // Hide confirmation
+            formView.classList.remove('hidden'); // Show form
+            // Form fields retain their values as we are not resetting them
+        }
+
+        // Function to confirm and send the message (triggered by "Confirm" button in confirmation view)
+        function confirmAndSendMessage() {
+            confirmationView.classList.add('hidden'); // Hide confirmation view
+            successMessageView.classList.remove('hidden'); // Show success message view
+
+            // You can add your actual form submission logic here (e.g., fetch API call)
+            console.log('Message confirmed and sent!');
+           
+            setTimeout(() => {
+                resetAndShowForm();
+            }, 3000); // Resets after 3 seconds
+        }
+
+        // Event listeners for buttons
+        editBtn.addEventListener('click', editMessage);
+        confirmSendBtn.addEventListener('click', confirmAndSendMessage);
+        closeFormBtn.addEventListener('click', resetAndShowForm); // Event listener for the "Close" button on success view
+
+        // Initialize the form state when the page loads
+        window.onload = function() {
+            resetAndShowForm();
+        };
+
+       
+    </script>
+</body>
+</html>

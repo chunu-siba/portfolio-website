@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Portfolio</title>
+    <!-- Google Fonts - Inter for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #1e293b; /* Dark text color */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem; /* px-6 */
+            padding-right: 1.5rem; /* px-6 */
+        }
+
+        /* Reusable Spacing and Typography */
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mb-16 { margin-bottom: 4rem; }
+        .mt-4 { margin-top: 1rem; }
+        .leading-tight { line-height: 1.25; }
+        .leading-relaxed { line-height: 1.625; } /* Based on Tailwind's leading-relaxed */
+
+        .text-center { text-align: center; }
+        .text-white { color: #ffffff; }
+        .text-gray-900 { color: #111827; }
+        .text-gray-800 { color: #1f2937; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-blue-600 { color: #2563eb; }
+        .text-blue-800 { color: #1e40af; }
+        .text-blue-200:hover { color: #bfdbfe; } /* Hover for header links */
+
+        .text-lg { font-size: 1.125rem; } /* 18px */
+        .text-xl { font-size: 1.25rem; } /* 20px */
+        .text-2xl { font-size: 1.5rem; } /* 24px */
+        .text-3xl { font-size: 1.875rem; } /* 30px */
+        .text-4xl { font-size: 2.25rem; } /* 36px */
+        .text-5xl { font-size: 3rem; } /* 48px */
+
+        .font-light { font-weight: 300; }
+        .font-normal { font-weight: 400; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+
+        .rounded-full { border-radius: 9999px; }
+        .rounded-lg { border-radius: 0.5rem; } /* 8px */
+        .rounded-xl { border-radius: 0.75rem; } /* 12px */
+
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+
+
+        /* --- Header Section --- */
+        .header {
+            background: linear-gradient(to right, #1d4ed8, #4338ca); /* from-blue-700 to-indigo-800 */
+            color: white;
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+        }
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            letter-spacing: -0.05em; /* tracking-tight */
+            color: inherit; /* Ensure link color is white */
+            text-decoration: none;
+        }
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1.5rem; /* space-x-6 */
+        }
+        .header-nav a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .header-nav a:hover {
+            color: #bfdbfe; /* hover:text-blue-200 */
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            padding-top: 5rem; /* py-20 */
+            padding-bottom: 5rem; /* py-20 */
+            background-color: #ffffff; /* bg-white */
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+        .hero-title {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 800; /* font-extrabold */
+            color: #1a202c; /* text-gray-900 */
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.25; /* leading-tight */
+        }
+        .hero-title span {
+            color: #703b06; /* text-blue-600 */
+            text-decoration: underline;
+            text-decoration-thickness: 7px;
+            text-underline-offset: 2px;
+        }
+        .hero-description {
+            font-size: 1.25rem; /* text-xl */
+            color: #374151; /* text-gray-700 */
+            max-width: 56rem; /* max-w-2xl */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        .hero-button {
+            display: inline-block;
+            background-color: #ad660f; /* bg-blue-600 */
+            color: white;
+            padding: 0.75rem 2rem; /* px-8 py-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .hero-button:hover {
+            background-color: #2a334c; /* hover:bg-blue-700 */
+            transform: scale(1.05); /* hover:scale-105 */
+        }
+
+        /* --- Projects Section --- */
+        .projects-section {
+            padding-top: 4rem; /* py-16 */
+            padding-bottom: 4rem; /* py-16 */
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        .projects-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            text-align: center;
+            color: #111827; /* text-gray-900 */
+            margin-bottom: 3rem; /* mb-12 */
+        }
+
+        .section-separator {
+            border-top: 1px solid #e2e8f0; /* Light gray separator */
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Project Card */
+        .project-card {
+            background-color: #ffffff; /* bg-white */
+            padding: 2rem; /* p-8 */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 4rem; /* mb-16 for first card */
+        }
+        .project-card:hover {
+            transform: translateY(-5px); /* Lift on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Enhanced shadow on hover */
+        }
+        .project-card h3 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 600; /* font-semibold */
+            color: #09090a; /* text-gray-800 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .project-card p {
+            color: #374151; /* text-gray-700 */
+            line-height: 1.625; /* leading-relaxed */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .project-buttons {
+            display: flex;
+            gap: 1rem; /* space-x-4 */
+            margin-bottom: 1rem;
+        }
+        .project-link {
+            display: inline-block;
+            padding: 0.5rem 1.5rem; /* px-6 py-2 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .project-link.live-site {
+            background-color: #bb840e; /* bg-green-600 */
+            color: white;
+            
+        }
+        .project-link.live-site:hover {
+            background-color: #020202; /* hover:bg-green-700 */
+        }
+        .project-link.github {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: white;
+        }
+        .project-link.github:hover {
+            background-color: #111827; /* hover:bg-gray-900 */
+        }
+        .project-image {
+            border-radius: 0.5rem; /* rounded-lg */
+            width: 100%; /* w-full */
+            height: auto; /* h-auto */
+            object-fit: cover;
+            border: 1px solid #e5e7eb; /* border border-gray-200 */
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            padding-top: 4rem; /* py-16 */
+            padding-bottom: 4rem; /* py-16 */
+            background-color: #eff6ff; /* bg-blue-50 */
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #1e40af; /* text-blue-800 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .about-section p {
+            font-size: 1.125rem; /* text-lg */
+            color: #374151; /* text-gray-700 */
+            line-height: 1.625; /* leading-relaxed */
+            max-width: 48rem; /* max-w-3xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            padding-top: 4rem; /* py-16 */
+            padding-bottom: 4rem; /* py-16 */
+            background-color: #ffffff; /* bg-white */
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+        }
+        .contact-section h2 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #1b1b1b; /* text-gray-900 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .contact-section p {
+            font-size: 1.25rem; /* text-xl */
+            color: #374151; /* text-gray-700 */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* space-x-6 */
+        }
+        .contact-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem; /* px-6 py-3 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-link.email {
+            background-color: #20a911; /* bg-blue-600 */
+            color: white;
+        }
+        .contact-link.email:hover {
+            background-color: #1d4ed8; /* hover:bg-blue-700 */
+            transform: scale(1.05); /* hover:scale-105 */
+        }
+        .contact-link.linkedin {
+            background-color: #0064f0; /* bg-gray-700 */
+            color: white;
+        }
+        .contact-link.linkedin:hover {
+            background-color: #1f2937; /* hover:bg-gray-800 */
+            transform: scale(1.05); /* hover:scale-105 */
+        }
+
+        /* --- Footer Section --- */
+        .footer {
+            background-color: #1f2937; /* bg-gray-800 */
+            color: white;
+            padding-top: 2rem; /* py-8 */
+            padding-bottom: 2rem; /* py-8 */
+        }
+        .footer .container {
+            text-align: center;
+            color: #9ca3af; /* text-gray-400 */
+        }
+
+
+        /* --- Responsive Styles (Media Queries) --- */
+        @media (min-width: 768px) { /* md breakpoint */
+            .project-card {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* md:grid-cols-2 */
+                gap: 3rem; /* gap-12 */
+                align-items: center;
+            }
+            .project-card > div:first-child { /* order-2 for first project text on md, order-1 for second */
+                order: 2; /* default for first project */
+            }
+            .project-card > div:last-child { /* order-1 for first project image on md, order-2 for second */
+                order: 1; /* default for first project */
+            }
+
+            /* Specific order for Project 1: text on right, image on left */
+            .project-card:first-of-type .project-content-left {
+                order: 2; /* order-2 md:order-1 for text */
+            }
+            .project-card:first-of-type .project-image-right {
+                order: 1; /* order-1 md:order-2 for image */
+            }
+
+            /* Specific order for Project 2: text on left, image on right */
+            .project-card:nth-of-type(2) .project-content-left {
+                order: 1; /* text on left */
+            }
+            .project-card:nth-of-type(2) .project-image-right {
+                order: 2; /* image on right */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+
+
+    <!-- Hero/Introduction Section -->
+    <section class="hero-section">
+        <div class="container px-6">
+            <h1 class="hero-title">
+                Hi, I'm <span>Chunu Siba</span>
+            </h1>
+            <p class="hero-description">
+                I'm a passionate web developer building modern, responsive, and user-friendly web experiences. Explore some of my latest projects below!
+            </p>
+            <a href="#projects" class="hero-button">
+                View My Work
+            </a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container px-6">
+            <h2 class="projects-title">My Projects</h2>
+
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-content-left">
+                    <h3>Website Project One: [Restaurant website]</h3>
+                    <p>
+                        this is my first ever frontend project, i needed to create a restaurant website that showcased the restaurants vibe menu and give users the option to order online and booking/reservations. 
+
+                        This project took me approximately 2weeks of planing  designing and programming usinh HTML,CSS and JavaScript to develop.
+
+
+                    </p>
+                    <div class="project-buttons">
+                        <a href="projects/ozana restaurant/" target="_blank" class="project-link live-site">
+                            view website
+                        </a>
+                        <a href="contact.html" target="_blank" class="project-link github">
+                            contact me
+                        </a>
+                    </div>
+                </div>
+                <div class="project-image-right">
+                    <img src="images/ozana restaurant.png" alt="Screenshot of Project One" class="project-image">
+                </div>
+            </div>
+
+            <div class="section-separator"></div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-content-left">
+                    <h3>Website Project Two: [E-commerce website</h3>
+                    <p>
+                        This project was insprired by athletes, the goal was to make it so that different types of atheletes engaging in different sports could shop form just a single website and not have to move across the entire internet to find the shoe that fit.
+
+                        the planning and development of this project took exactly an entire 3weeks to complete, this is purely the frontend aspect of the wesbsite using HTML,CSS,JavaScript
+                    </p>
+                    <div class="project-buttons">
+                        <a href="projects/shoe-website/" target="_blank" class="project-link live-site">
+                            view website
+                        </a>
+                        <a href="https://github.com/yourusername/projecttwo" target="_blank" class="project-link github">
+                         contact me
+                        </a>
+                    </div>
+                </div>
+                <div class="project-image-right">
+                    <img src="images/zasce screenshot.png" alt="Screenshot of Project Two" class="project-image">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container px-6">
+            <h2>About Me</h2>
+            <p>
+                I'm a self-taught developer with a passion for creating elegant solutions and bringing ideas to life on the web. I enjoy learning new technologies and constantly improving my craft. My goal is to build impactful applications that are both functional and delightful to use.
+            </p>
+            <p class="mt-4">
+                In my free time, I enjoy bike riding , reading and walking.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container px-6">
+            <h2>Get In Touch</h2>
+            <p>
+                Have a project in mind or just want to say hello? Feel free to reach out!
+            </p>
+            <div class="contact-buttons">
+                <a href="contact.html" class="contact-link email" id="contact-me">
+                   contact me
+                </a>
+                <a href="https://linkedin.com/in/chunu siba" target="_blank" class="contact-link linkedin">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container px-6">
+            &copy; 2025. All rights reserved. | Built with ❤️ by chunu.
+        </div>
+    </footer>
+
+</body>
+</html>

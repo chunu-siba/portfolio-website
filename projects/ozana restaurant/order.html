@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OZANA  bar&grill - Order Online</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">The Grill & Pour</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html" class="active">Order Online</a></li>
+                <li><a href="reserve.html">Reservations</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="burger-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="order-page">
+        <section class="order-hero">
+            <h1>Place Your Order Online</h1>
+            <p>Select your favorite dishes and drinks for pickup or delivery.</p>
+        </section>
+
+        <section class="order-form-section">
+            <h2>Our Full Menu</h2>
+            <div class="order-items-container">
+                <div class="order-item-card" data-item-id="ribeye-steak" data-price="28.99">
+                    <img src="images/apetizers/BBQ burger (with onion rings and BBQ sauce).jpg" alt="Ribeye Steak">
+                    <h3>RBBQ burgers</h3>
+                    <p>Grilled to perfection.</p>
+                    <span class="price">$28.99</span>
+                    <div class="quantity-control">
+                        <button class="decrease-qty">-</button>
+                        <input type="number" class="item-qty" value="0" min="0">
+                        <button class="increase-qty">+</button>
+                    </div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                <div class="order-item-card" data-item-id="margarita" data-price="11.00">
+                    <img src="images/apetizers/beverages/Classic Margarita.jpg" alt="Margarita">
+                    <h3>Classic Margarita</h3>
+                    <p>Refreshing and zesty.</p>
+                    <span class="price">$11.00</span>
+                     <div class="quantity-control">
+                        <button class="decrease-qty">-</button>
+                        <input type="number" class="item-qty" value="0" min="0">
+                        <button class="increase-qty">+</button>
+                    </div>
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </div>
+                </div>
+
+            <div class="cart-summary">
+                <h2>Your Cart</h2>
+                <ul id="cart-list">
+                    <li>No items in cart</li>
+                </ul>
+                <p class="total-price">Total: $<span id="cart-total">0.00</span></p>
+                <button id="checkout-btn" class="btn" disabled>Proceed to Checkout</button>
+            </div>
+
+            <div id="checkout-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Checkout</h2>
+                    <form id="checkout-form">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" required>
+
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" required>
+
+                        <label for="address">Address (for Delivery):</label>
+                        <input type="text" id="address">
+
+                        <label for="delivery-pickup">Delivery/Pickup:</label>
+                        <select id="delivery-pickup">
+                            <option value="pickup">Pickup</option>
+                            <option value="delivery">Delivery</option>
+                        </select>
+
+                        <label for="notes">Special Notes:</label>
+                        <textarea id="notes"></textarea>
+
+                        <button type="submit" class="btn">Confirm Order</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
