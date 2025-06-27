@@ -452,7 +452,7 @@ nav ul#list {
     }
     .container-4 .card-4 p {
         font-size: 1rem; /* Smaller testimonial text */
-        max-width: 90%; /* Ensure text wraps well */
+  
     }
     .prev, .next {
         padding: 10px; /* Smaller arrows */
@@ -474,6 +474,9 @@ nav ul#list {
         width: 6em; /* Smaller image */
         height: 6em;
     }
+     .container-4 .card-4 {
+        min-width: 90%;
+     }
 }
 
 
