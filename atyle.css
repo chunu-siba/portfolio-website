@@ -21,90 +21,115 @@
         }
 
         /* Global Box Sizing & Font Family */
-        *{
-            box-sizing: border-box;
-            margin: 0;
-            font-family:'Inter', sans-serif; /* Preferred font */
-            padding: 0;
-        }
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family:'Inter', sans-serif; /* Preferred font */
+    padding: 0;
+ }
 
         /* Body Styles */
-        body{
-            background:white; /* Default background */
-            color: var(--text-color-dark); /* Default text color for light backgrounds */
-            width: 100vw;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-
+/* General Body Styles */
+body {
+    background: white;
+    color: var(--text-color-dark);
+    overflow-x: hidden;
+}
         /* Container for content sections (similar to previous .container) */
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem; /* Consistent padding */
-        }
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* Consistent padding */
+}
 
-        /* --- Navigation Bar --- */
-        nav{
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Changed from align-content */
-            margin: 0; /* Remove margin for full-width sticky */
-            padding: .5em 1.5em; /* Add padding to nav itself */
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            width: 100vw;
-            background-color: #000701; /* Default background for nav */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em 1.5em;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100vw;
+    background-color: #000701;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        nav.scrolled {
-     
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
+nav ul#list {
+    display: flex; /* Default for desktop */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
 
-        nav .logo{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        nav .logo #name{
-            text-transform: uppercase;
-            font-size: 2rem;
-            color: rgb(255, 255, 255);
-            margin: 0;
-        }
-        nav .logo p {
-            color: #08701f;
-            font-size: 0.9rem;
-            margin-top: -0.2em;
-        }
+/* Hamburger menu icon - default hidden on desktop */
+.menu {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white; /* Changed to white for visibility on dark nav */
+}
 
-        nav ul#list{
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center; /* Align list items vertically */
-        }
-        nav ul li {
-            padding: .75em 1em;
-            display: block;
-        }
-        nav ul li a{
-            color:white;
-            text-decoration: none;
-            text-transform: capitalize;
-            transition: color 0.3s ease;
-        }
-        nav ul li a:hover {
-            color: var(--accent-color); /* Highlight on hover */
-        }
-        nav ul li a i {
-            font-size: 0.8em;
-            margin-left: 0.3em;
-        }
+/* Responsive navigation - Media Queries */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.8em 1.5em; /* Adjust padding for smaller screens */
+    }
+
+    nav ul#list {
+        display: none; /* Hide navigation links by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Position below the nav bar */
+        left: 0;
+        width: 100%;
+        background-color: #000701; /* Match nav background */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        padding: 1em 0;
+        z-index: 999;
+    }
+
+    nav ul#list.open {
+        display: flex; /* Show navigation links when 'open' class is active */
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 0.7em 0;
+    }
+
+    nav ul li a {
+        padding: 0.5em 0; /* Adjust padding for links */
+    }
+
+    .action {
+        display: none; /* Hide "reach out" button on mobile menu */
+    }
+
+    .menu {
+        display: block; /* Show hamburger menu icon on mobile */
+    }
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 480px) {
+    nav .logo #name {
+        font-size: 1.8rem; /* Smaller logo name */
+    }
+    nav .logo p {
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+
 .action i,a{
     color: white;
     padding: 10px ;
@@ -130,9 +155,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100vw;
     height: 50vh;
-    padding: 2rem;
+    margin: 2rem 0; 
 }
 
 .about-me-photo img{
@@ -154,26 +180,30 @@
 
 
 /* services section begining */
-#services .container{
+
+#services .container {
     display: flex;
-    justify-content:space-between;
+    justify-content: center; /* Center cards when fewer items */
     flex-wrap: wrap;
     position: relative;
-
+    padding: 1em; /* Add some padding to the container */
 }
-#services .container .card{
-    width: 20em;
+
+#services .container .card {
+    width: 20em; /* Original fixed width */
+    min-width: 280px; /* Minimum width to prevent crushing */
+    max-width: 90%; /* Max width for single column on very small screens */
+    flex: 1 1 calc(33% - 2em); /* Default for 3 columns on larger screens */
     align-items: center;
     background-color: var(--gray-light);
     color: rgb(0, 0, 0);
-    margin: 1em  ;
-    padding:  2em;
+    margin: 1em; /* Keep margin for spacing */
+    padding: 2em;
     border-radius: 20px;
     transition: all .5s ease;
-    box-shadow: 15px 5px solid black;
-    
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
-
 
 #services .container .card:hover{
             transform: translateY(-10px);
@@ -203,100 +233,119 @@
     font-weight: 400;
     font-size: 16px;
 }
+
+
+
+
+/* Media Query for Services Section (Tablets) */
+@media (max-width: 1024px) {
+    #services .container .card {
+        flex: 1 1 calc(45% - 2em); /* Two columns on tablets */
+    }
+}
+
+/* Media Query for Services Section (Mobile) */
+@media (max-width: 768px) {
+    #services .container .card {
+        flex: 1 1 calc(90% - 2em); /* Single column on mobile */
+        margin: 1em auto; /* Center single card */
+    }
+}
+
+@media (max-width: 480px) {
+    #services .container .card {
+        padding: 1.5em; /* Smaller padding on very small screens */
+    }
+    #services .container .card i {
+        font-size: 1.8em; /* Slightly smaller icons */
+        padding: 1.5rem;
+    }
+    #services .container .card h2 {
+        font-size: 20px;
+    }
+    #services .container .card h3 {
+        font-size: 15px;
+    }
+}
 /* services section ending */
       
 
 
 
 /* Section Three */
-        .three{
-            background-image: url(bg-phone.jpg);
-            background-size: cover; /* Changed to cover */
-            background-position: center;
-            margin-top: 5em;
-            padding: 5em 0; /* Add padding for content within background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* Section Three */
+.three {
+    background-image: url(bg-phone.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: for parallax effect */
+    margin-top: 5em;
+    padding: 5em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .three .content { /* Wrapper for inner flex container */
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
+.three .container-1 {
+    flex-wrap: wrap; /* Already good */
+    padding: 2em; /* Adjusted padding for all screen sizes */
+}
 
-        .three .container-1{
-            background-color:rgba(0, 0, 0, 0.473); /* Dark background */
-            display: flex;
-            border-radius: 20px;
-            width: 90%; /* Use percentage for responsiveness */
-            max-width: 1000px; /* Max width for desktop */
-            padding: 3em;
-            justify-content: space-between;
-            align-items: center; /* Align items vertically */
-            flex-wrap: wrap; /* Allow wrapping on small screens */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .three .container-1 .card-1 {
-            flex: 1 1 45%; /* Flex-grow, flex-shrink, basis */
-            max-width: 45%; /* Set max-width for image container */
-            border-radius: 20px;
-            overflow: hidden; /* Ensure image corners are rounded */
-        }
-        .three .container-1 .card-1 img{
-            width: 100%; /* Make image responsive */
-            height: auto; /* Maintain aspect ratio */
-            display: block;
-            object-fit: cover;
-            border-radius: 20px; /* Match container border-radius */
-        }
+.three .container-1 .card-1,
+.three .container-1 .info {
+    flex: 1 1 45%; /* Default desktop */
+    max-width: 45%; /* Default desktop */
+}
 
-        .three .container-1 .info{
-            flex: 1 1 50%; /* Flex-grow, flex-shrink, basis */
-            max-width: 50%; /* Set max-width for info content */
-            padding-left: 2em; /* Add padding from image */
-        }
-        .three .container-1 .info button{
-            height: var(--btn-hgt);
-            width: var(--btn-width);
-            background-color: var(--btn-color);
-            border: 1px solid var(--btn-color);
-            border-radius: 10px;
-            color: var(--font-color); /* Text color from var */
-            margin-top: 3em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .three .container-1 .info button:hover {
-             background-color: #0b340b; /* Slightly darker green */
-             transform: translateY(-2px);
-        }
+/* Media Query for Section Three (Tablets and smaller) */
+@media (max-width: 768px) {
+    .three {
+        padding: 3em 0; /* Reduced padding */
+    }
+    .three .container-1 {
+        flex-direction: column; /* Stack items vertically */
+        padding: 1.5em; /* Smaller padding */
+        width: 95%; /* Take more width on smaller screens */
+    }
+    .three .container-1 .card-1,
+    .three .container-1 .info {
+        flex: 1 1 100%; /* Full width for each item */
+        max-width: 100%;
+        padding: 0; /* Remove padding */
+        margin-bottom: 1.5em; /* Space between stacked items */
+        text-align: center; /* Center text for info */
+    }
+    .three .container-1 .info {
+        padding-left: 0; /* Remove left padding */
+    }
+    .three .container-1 .info button {
+        margin-top: 2em; /* Adjusted margin */
+    }
+    .three .container-1 .info p {
+        padding: 0.8em 0; /* Adjusted paragraph padding */
+        font-size: 1rem;
+    }
+}
 
-        .three .container-1 .info p{
-            padding: 1em 0; /* Adjusted padding */
-            font-size: 1.1rem; /* Slightly smaller font size */
-            color: white;
-            border-bottom: 1px solid rgba(255,255,255,0.1); /* Use border-bottom instead of hr */
-            margin-bottom: 0.5em;
-        }
-         .three .container-1 .info p:last-of-type {
-            border-bottom: none; /* No border for the last paragraph */
-         }
+/* Media Query for Section Three (Very small phones) */
+@media (max-width: 480px) {
+    .three {
+        padding: 2em 0; /* Further reduced padding */
+    }
+    .three .container-1 {
+        padding: 1em; /* Further reduced padding */
+    }
+    .three .container-1 .info p {
+        font-size: 0.95rem; /* Smaller font size */
+    }
+}
 
-        .three .container-1 .info p:hover{
-            color: aqua;
-            transition: all ease-in-out 0.2s;
-        }
-        .three .container-1 .info p i {
-            margin-right: 0.5em;
-            color: var(--accent-color); /* Color for arrow icons */
-        }
+
 
 
         /* Section Four (Testimonials) */
         .four{
-            margin-bottom: 5em;
+            margin-bottom: 3em;
             padding: 2em 0; /* Add padding for content */
         }
         .four h1{
@@ -305,7 +354,8 @@
             opacity: .9; /* Slightly more opaque */
             text-transform: capitalize;
             color: var(--text-color-dark);
-            font-size: 2.2rem; /* Adjusted for consistency */
+            font-size: 2rem; /* Adjusted for consistency */
+            padding: 1.5em 1em;
         }
         .container-4 {
             max-width: 100%;
@@ -390,66 +440,137 @@
             background-color: var(--accent-color); /* Active dot color */
         }
 
+/* Media Query for Testimonials Section */
+@media (max-width: 768px) {
+    .four h1 {
+        font-size: 1.8rem;
+        padding: 1em 0.5em;
+    }
+    .container-4 .card-4 {
+        padding: 0.5em 1em; /* Reduced internal padding for cards */
+    }
+    .container-4 .card-4 p {
+        font-size: 1rem; /* Smaller testimonial text */
+        max-width: 90%; /* Ensure text wraps well */
+    }
+    .prev, .next {
+        padding: 10px; /* Smaller arrows */
+        font-size: 1.2rem;
+    }
+    .dot {
+        height: 10px; /* Smaller dots */
+        width: 10px;
+    }
+}
+@media (max-width: 480px) {
+    .four h1 {
+        font-size: 1.5rem; /* Even smaller heading */
+    }
+    .container-4 .card-4 img {
+        width: 6em; /* Smaller image */
+        height: 6em;
+    }
+}
 
-        /* About Me Section */
-        #about.section {
-            padding: 100px 0;
-            background-color: #f0f2f5; /* Light background */
-        }
 
-        /* Changed .container to .content-container for consistency */
-        #about .content-container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
 
-        #about .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-            color: black; /* Changed to black as per original */
-        }
 
-        #about .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
+/* About Me Section */
+#about.section {
+    padding: 60px 0; /* Adjusted padding */
+    background-color: #f0f2f5;
+}
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: start; /* Align to top */
-        }
+.about-me-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Use 100% instead of 100vw to fit container better */
+    height: auto; /* Allow height to adjust */
+    padding: 1rem; /* Reduced padding */
+    margin-bottom: 2em; /* Add space below photo */
+}
 
-        .about-text {
-            color: black;
-            line-height: 1.7;
-        }
+.about-me-photo img {
+    width: 12em; /* Smaller on desktop */
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 10px 15px rgba(128, 128, 128, 0.1); /* Lighter shadow */
+}
 
-        .intro {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
+/* About content grid */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default desktop */
+    gap: 40px; /* Reduced gap */
+    align-items: start;
+}
 
-        .about-text h3 {
-            color: var(--accent-color);
-            margin: 25px 0 15px;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* Stats Cards */
+.about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default desktop */
+    gap: 20px; /* Reduced gap */
+}
+
+/* Personal Info */
+.personal-info {
+    grid-column: span 2; /* Span full width on desktop */
+}
+
+/* Media Query for About Section (Tablets and smaller) */
+@media (max-width: 768px) {
+    #about .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 30px;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr; /* Stack stats cards */
+        gap: 20px;
+    }
+
+    .personal-info {
+        grid-column: span 1; /* Occupy single column when stacked */
+    }
+
+    .about-me-photo img {
+        width: 15em; /* Slightly larger on tablet for focus */
+    }
+}
+
+/* Media Query for About Section (Very small phones) */
+@media (max-width: 480px) {
+    #about.section {
+        padding: 40px 0; /* Further reduced padding */
+    }
+
+    #about .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .about-me-photo img {
+        width: 10em; /* Smaller on very small screens */
+    }
+
+    .stat-card {
+        padding: 20px; /* Reduced padding for smaller cards */
+    }
+    .stat-number {
+        font-size: 2rem; /* Smaller numbers */
+    }
+}
+
+
+
+
 
         .edu-item {
             margin-bottom: 20px;
@@ -566,11 +687,11 @@
 
         /* Skills Section */
         .skills-wrapper {
-            padding-bottom: 5em; 
+            padding-bottom:3em; 
             
         }
         #skills.section {
-            padding: 60px 0; /* Adjusted padding for skills section */
+            padding: 40px 0; /* Adjusted padding for skills section */
         }
 
         #skills{
@@ -607,12 +728,13 @@
 
         .skills-column {
             background-color: var(--gray-light); /* Adjusted background */
-            padding:40px 80px ;
+            padding:30px 40px ;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: .5s ease;
             max-width: 500px; /* Max width for each column */
-            flex: 1 1 auto; /* Allow column to grow/shrink */
+            flex: 1 1 45%; /* Allow column to grow/shrink */
+            box-sizing: border-box;
         }
         .skills-column:hover{
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -694,26 +816,69 @@
             font-weight: normal; /* Less bold for integration */
         }
 
+
+
+/* Media Query for Skills Section (Tablets and smaller) */
+@media (max-width: 768px) {
+    #skills .section-title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        padding: 0 1em; /* Add horizontal padding */
+    }
+    .skills-container {
+        flex-direction: column; /* Stack columns on smaller screens */
+        align-items: center; /* Center stacked columns */
+        gap: 30px; /* Space between stacked columns */
+    }
+    .skills-column {
+        flex: 1 1 90%; /* Full width on smaller screens (with margin/padding) */
+        max-width: 90%; /* Limit overall width */
+        padding: 30px; /* Slightly reduced padding */
+    }
+}
+
+/* Media Query for Skills Section (Very small phones) */
+@media (max-width: 480px) {
+    .skills-header h3 {
+        font-size: 1.3rem; /* Smaller heading */
+    }
+    .skills-column {
+        padding: 20px; /* Further reduced padding */
+    }
+    .skill-info {
+        font-size: 0.9rem; /* Smaller skill text */
+    }
+    .skill-category h4 {
+        font-size: 1.1rem;
+    }
+}
         /* Footer */
         footer{
             background-color: var(--footer); /* Use variable for consistency */
-            padding: 2em 1em; /* Add padding */
+            padding: 1.5em 1em; /* Add padding */
         }
         footer .links{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             flex-wrap: wrap; /* Allow wrapping for responsiveness */
-            margin-bottom: 2em; /* Space between links and container-5 */
+            margin-bottom: 1.5em; /* Space between links and container-5 */
         }
         footer .container-5{
             display: flex;
             justify-content: space-evenly;
             align-items: center;
+            flex-direction: column;
+            gap: 1em;
             flex-wrap: wrap; /* Allow wrapping */
             text-align: center; /* Center content when wrapped */
         }
         footer .container-5 > div { /* Target direct children of container-5 */
-            margin: 0.5em 1em; /* Add margin for spacing when wrapped */
+            margin: 0 0.4em; 
+            font-size: 1.3rem;/* Add margin for spacing when wrapped */
         }
 
         .social i{
@@ -736,16 +901,18 @@
         }
 
         footer .links ul{
-            color: aqua; /* Heading color */
+            color: rgb(255, 255, 255); /* Heading color */
             text-transform: uppercase;
             padding: 20px;
-            margin: 0 1em; /* Margin for each ul block */
-            flex: 1 1 200px; /* Allow columns to grow/shrink, min-width 200px */
+            margin: 0.5 .5em; /* Margin for each ul block */
+            flex: 1 1 200px auto; /* Allow columns to grow/shrink, min-width 200px */
+            min-width: 150px;
+            text-align: center;
         }
 
         footer .links ul li{
             list-style: none;
-            padding: 10px 0; /* Adjusted padding */
+            padding: 8px 0; /* Adjusted padding */
         }
 
         footer .links ul li a{
@@ -753,11 +920,50 @@
             text-decoration: none;
             text-transform: capitalize;
             transition: color 0.3s ease;
+            font-size: .95em;
         }
         footer .links ul li a:hover {
-            color: aqua;
+            color: rgb(24, 26, 26);
         }
 
+
+
+/* Media Query for Footer (Mobile) */
+@media (max-width: 768px) {
+    footer .links {
+        flex-direction: column; /* Stack link lists */
+        align-items: center; /* Center the stacked lists */
+        margin-bottom: 1em;
+    }
+    footer .links ul {
+        width: 100%; /* Full width for stacked lists */
+        text-align: center; /* Center all items within list */
+        margin: 0.8em 0; /* Space between stacked lists */
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* Separator */
+    }
+    footer .links ul:last-child {
+        border-bottom: none; /* No separator for the last one */
+    }
+    footer .links ul h5 { /* Assuming headings are h5 */
+        margin-bottom: 0.5em;
+    }
+
+    footer .container-5 {
+        padding: 0 1em; /* Add horizontal padding */
+    }
+}
+
+@media (max-width: 480px) {
+    footer .links ul {
+        padding: 10px;
+    }
+    footer .links ul li {
+        font-size: 0.9em;
+    }
+    footer .container-5 .div-2 span {
+        font-size: 0.8em;
+    }
+}
         /* --- Back-to-Top Button --- */
         .back-btn {
             position: fixed;
@@ -770,7 +976,7 @@
             background: #000;
             color: white;
             cursor: pointer;
-            z-index: 999; /* Ensure it's above most content but below nav */
+            z-index:1000; /* Ensure it's above most content but below nav */
             box-shadow: 3px 3px 5px rgba(0,0,0,0.4);
             border-radius: 50%;
             font-size: 15px;
@@ -784,46 +990,4 @@
         }
 
 
-        /* responsive web design */
-
-        @media (min-width:48xpx) and (max-width:768px){
-          
-       header{
-        width: 100vw;
-       }
-       header nav{
-        width: 100%;
-       }
-       #about {
-        margin:4em 0;
-       }
-       .about-text{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-       }
-  
-        #about .section-title{
-          padding-top: 1em;
-        }
-        }
-
-        
-        @media only screen and (max-width:420px){
-          body{
-            width: 100vw;
-            height: 100vh;
-          }
-          nav{
-            width: 100%;
-          }
-          nav ul a{
-            display: none;
-          }
-          main #about{
-            width: 100vw;
-          }
-          main #about .about-me-photo{
-            width: 100%;
-          }
-        }
+       
